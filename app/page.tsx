@@ -1,9 +1,19 @@
 'use client'
-import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import Link from "next/link";
 import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function Home() {
+
+
+  const dispatch = useDispatch();
+
+
+  const projects = useSelector((state : any) => state.project.projects);
+
+
+ 
 
 useEffect(() => {
 
@@ -27,17 +37,26 @@ useEffect(() => {
 
 
 
+
+
+const handleCurrentProject = (title:string) => {
+  dispatch({type : 'SET_SELECTED', payload : title})
+}
+
+
+
   return (
 
     <section className="w-full flex justify-end items-center ">
       <ul className="w-full flex transition-all justify-end items-end perspective-800 pt-20 flex-col p-4">
-      <li id="listitem" className="font-extrabold text-5xl md:text-7xl lg:text-10xl transform opacity-100 -rotate-y-12 hover:-rotate-y-6  transition-all cursor-pointer hover:text-transparent hover: text-black font-freeman">CLIENT PORTFOLIO</li>
-        <li id="listitem" className="font-extrabold text-5xl md:text-7xl lg:text-10xl transform opacity-100 -rotate-y-12 hover:-rotate-y-6  transition-all cursor-pointer hover:text-transparent hover: text-black font-freeman">VALKOMPASSEN</li>
-        <li id="listitem" className="font-extrabold text-5xl md:text-7xl lg:text-10xl transform opacity-100 -rotate-y-12 hover:-rotate-y-6  transition-all cursor-pointer hover:text-transparent hover: text-black font-freeman">SOUNDBOOM</li>
-        <li id="listitem" className="font-extrabold text-5xl md:text-7xl lg:text-10xl transform opacity-100 -rotate-y-12 hover:-rotate-y-6  transition-all cursor-pointer hover:text-transparent hover: text-black font-freeman">BUDGETHERO</li>
-        <li id="listitem" className="font-extrabold text-5xl md:text-7xl lg:text-10xl transform opacity-100 -rotate-y-12 hover:-rotate-y-6  transition-all cursor-pointer hover:text-transparent hover: text-black font-freeman">RADYANT CANVAS</li>
-        <li id="listitem" className="font-extrabold text-5xl md:text-7xl lg:text-10xl transform opacity-100 -rotate-y-12 hover:-rotate-y-6  transition-all cursor-pointer hover:text-transparent hover: text-black font-freeman">COOL PROJECT</li>
-       
+
+        {projects.map((project : any, index : number) => (
+
+          <Link onClick={() => handleCurrentProject(project.title)} href={`/projects/${project.title}`} key={index}>
+              <li id="listitem" className="font-extrabold text-5xl md:text-7xl lg:text-10xl transform opacity-100 -rotate-y-12 hover:-rotate-y-6  transition-all cursor-pointer hover:text-transparent hover: text-black font-freeman">{project.title.toUpperCase()}</li>
+          </Link>
+
+        ))}
       </ul>
 
     </section>
