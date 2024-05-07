@@ -1,4 +1,5 @@
 'use client'
+import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import Link from "next/link";
 import { useEffect } from "react";
@@ -13,21 +14,35 @@ export default function Home() {
   const projects = useSelector((state : any) => state.project.projects);
 
 
- 
 
-useEffect(() => {
+
+  useEffect(() => {
+    fetch("/api/connectDB", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "cache-control": "no-cache"
+      },
+    })
+      .then((res) => res.json())
+      .then((data : any) => {
+        dispatch({type : 'GET_PROJECTS', payload : data.projects})
+    })
+  })
+
+
+useGSAP(() => {
 
   gsap.fromTo(
     "#listitem", // CSS selector for the elements to animate
     {
       opacity: 0,
       y: 100,
-      rotateY: 12, // Initial rotation
+      rotateY: 12,
     },
     {
       opacity: 1,
       y: 0,
-      rotateY: 0, // Final rotation
       duration: 1,
       stagger: 0.1,
       ease: "power2.out", // Easing function
