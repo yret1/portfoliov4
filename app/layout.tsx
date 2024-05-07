@@ -11,6 +11,12 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Gustavsson | Home",
   description: "A Swedish web developer and designer.",
+  icons: [
+    {
+      rel: "icon",
+      url: "/icons/Favicon.jpg",
+    },
+  ]
 };
 
 export default function RootLayout({
