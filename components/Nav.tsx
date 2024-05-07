@@ -5,7 +5,17 @@ import { useEffect, useState } from "react"
 
 import {AnimatePresence, motion} from "framer-motion"
 
+import { usePathname} from "next/navigation"
+import Link from "next/link"
+
 const Nav = () => {
+
+
+    const current = usePathname();
+
+
+
+
 
     
 
@@ -13,11 +23,21 @@ const Nav = () => {
     const [smallScreen, setSmallScreen] = useState(false)
     const [menuOpen, setMenuOpen] = useState(false)
 
+    const [scroll, setScroll] = useState(false)
+
+
+    const [projectview, setProjectView] = useState(false)
 
 
 
     useEffect(() => {
 
+
+        if(current === "/") {
+            setProjectView(false)
+        }else {
+            setProjectView(true)
+        }
       
 
 
@@ -37,7 +57,29 @@ const Nav = () => {
             }
         })
 
-    }, [])
+
+
+        window.addEventListener("scroll", handleScroll)
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll)
+        }
+
+    }, [current, projectview])
+
+
+
+    const handleScroll = () => {
+        const scroll = window.scrollY
+
+
+        if(scroll >= 300) {
+            setScroll(true)
+        }else{
+            setScroll(false)
+        }
+    }
+
 
 
 
@@ -49,16 +91,49 @@ const Nav = () => {
 
 
 
+
+
+
     if(!smallScreen) {
   return (
-    <header className="hidden md:flex z-40 w-screen fixed bottom-0 left-0 justify-between px-10 py-4 items-end">
-       
+    <>
+
+<motion.section
+    initial={{top: projectview ? "2vh" : "75vh",
+        opacity: 1
+    }}
+    animate={{top: projectview ? "2vh" : "75vh",
+    opacity: 1
+    }}
+    exit={{top: projectview ? "2vh" : "75vh",
+    opacity: 1
+    }}
+    transition={{duration: 1, ease: "easeInOut"}}
+id="logo"
+ className={`p-10 transition-all fixed`}>
+
+<Link href="/">
+<Image src={"/icons/Logowhite.svg"} width={50} height={50} className={`md:w-28 md:h-28 transition-opacity duration-200  ${scroll ? "opacity-35" : "opacity-100"}`} alt="Logo" />
+</Link>
+
+ </motion.section>
+
+ <motion.section
+  initial={{top: projectview ? "10vh" : "91.5vh"}}
+  animate={{top: projectview ? "10vh" : "91.5vh"}}
+  exit={{top: projectview ? "10vh" : "91.5vh"}}
+  transition={{duration: 1.2, ease: "easeInOut"}}
+  id="linksone" className={`flex flex-col fixed left-96 transition-opacity duration-200  ${scroll ? "opacity-35" : "opacity-100"}`}>
+
+<p className="flex items-center justify-start text-[12px]  gap-2"><span className="font-thin text-[12px] text-opacity-50">01</span>about</p>
+<p className="flex items-center justify-start text-[12px]  gap-2"><span className="font-thin text-[12px] text-opacity-50">02</span>journal</p>
+
+</motion.section>
+    
+    <header className={`hidden md:flex transition-all z-40 w-screen fixed bottom-0 left-0 justify-between px-10 py-4 items-end`}>
 
        <section className="flex flex-col">
-        <section className="p-10">
-
-       <Image src={"/icons/Logowhite.png"} width={50} height={50} className="md:w-28 md:h-28" alt="Logo" />
-        </section>
+       
 
        <section className="flex justify-start gap-6 p-10">
             <section className="flex flex-col items-start justify-center">
@@ -74,12 +149,7 @@ const Nav = () => {
 
 
             </section>
-            <section className="flex flex-col">
-
-                <p className="flex items-center justify-start text-[12px]  gap-2"><span className="font-thin text-[12px] text-opacity-50">01</span>about</p>
-                <p className="flex items-center justify-start text-[12px]  gap-2"><span className="font-thin text-[12px] text-opacity-50">02</span>journal</p>
-
-            </section>
+           
        </section>
        </section>
 
@@ -90,6 +160,7 @@ const Nav = () => {
                 <p className="flex items-center justify-start text-[12px]  gap-2"><span className="font-thin text-[12px] text-opacity-50">02</span>upwork</p> <p className="flex items-center justify-start text-[12px]  gap-2"><span className="font-thin text-[12px] text-opacity-50">01</span>contact</p>
        </section>
     </header>
+    </>
   )
 }
 

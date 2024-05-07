@@ -28,7 +28,6 @@ const config: Config = {
         "9xl" : "7rem",
         "10xl" : "8rem",
       },
-      
     },
   },
   plugins: [
