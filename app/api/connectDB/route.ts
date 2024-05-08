@@ -1,8 +1,9 @@
 import { connectToMongoDB } from "@/lib/mongo";
 import { NextApiRequest, NextApiResponse } from "next";
+import { NextRequest, NextResponse } from "next/server";
 
 
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
+export async function POST(req: NextRequest, res: NextResponse) {
 
 
     try {
@@ -14,6 +15,6 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
       
        return Response.json({projects : projects})
     }catch(err) {
-       return res.json({error : err});
+       return Response.json({error : err})
     }
 }
