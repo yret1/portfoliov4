@@ -11,6 +11,14 @@ import Link from "next/link"
 const Nav = () => {
 
 
+
+    /**
+     * Navbar renderas i root layout. Navbaren har 2 verisoner, en för desktop och en för touchscreens.
+     *
+     * Mobilversionen har en meny som öppnas och stängs med en knapp medans desktopversionen har en fast navbar med mer avancerade animationer.
+     */
+
+
     const current = usePathname();
 
 
@@ -123,10 +131,14 @@ id="logo"
   animate={{top: projectview ? "10vh" : "91.5vh"}}
   exit={{top: projectview ? "10vh" : "91.5vh"}}
   transition={{duration: 1.2, ease: "easeInOut"}}
-  id="linksone" className={`flex flex-col fixed left-96 transition-opacity duration-200  ${scroll ? "opacity-35" : "opacity-100"}`}>
+  id="linksone" className={`flex flex-col fixed left-96 transition-opacity z-50 duration-200  ${scroll ? "opacity-35" : "opacity-100"}`}>
 
-<p className="flex items-center justify-start text-[12px]  gap-2"><span className="font-thin text-[12px] text-opacity-50">01</span>about</p>
-<p className="flex items-center justify-start text-[12px]  gap-2"><span className="font-thin text-[12px] text-opacity-50">02</span>journal</p>
+<Link href={"/about"}>
+<p className="flex items-center justify-start text-[12px] hover:scale-110   gap-2"><span className="font-thin text-[12px] z-50 text-opacity-50">01</span>about</p>
+</Link>
+<Link href={"/journal"}>
+<p className="flex items-center justify-start text-[12px] hover:scale-110   gap-2"><span className="font-thin text-[12px] z-50 text-opacity-50">02</span>journal</p>
+</Link>
 
 </motion.section>
     
@@ -156,8 +168,16 @@ id="logo"
 
        <section className="flex flex-col justify-end items-center p-10" >
 
-       <p className="flex items-center justify-start text-[12px]  gap-2"><span className="font-thin text-[12px] text-opacity-50">03</span>linkedin</p>
-                <p className="flex items-center justify-start text-[12px]  gap-2"><span className="font-thin text-[12px] text-opacity-50">02</span>upwork</p> <p className="flex items-center justify-start text-[12px]  gap-2"><span className="font-thin text-[12px] text-opacity-50">01</span>contact</p>
+        <Link href={"/contact"}>
+       <p className="flex hover:scale-110 items-center justify-start text-[12px]  gap-2"><span className="font-thin text-[12px] text-opacity-50">03</span>contact</p>
+        </Link>
+
+    <a href="https://www.upwork.com/freelancers/~016509dc8b3fcee662?mp_source=share" referrerPolicy="no-referrer" target="_blank">
+                <p className="flex hover:scale-110  items-center justify-start text-[12px]  gap-2"><span className="font-thin text-[12px] text-opacity-50">04</span>upwork</p> 
+    </a>
+    <a href="" referrerPolicy="no-referrer" target="_blank">
+       <p className="flex items-center hover:scale-110  justify-start text-[12px]  gap-2"><span className="font-thin text-[12px] text-opacity-50">05</span>linkedin</p>
+    </a>
        </section>
     </header>
     </>
@@ -169,7 +189,10 @@ else {
         <header className="w-screen md:hidden fixed top-0 z-40 left-0 justify-between items-center flex">
 
             <section className="p-5 z-40">
+                <Link href="/">
+
                 <Image src={"/icons/Logowhite.png"} width={50} height={50} alt="Logo" />
+                </Link>
             </section>
             <section className="p-5 z-40">
                 <button className="w-full h-full flex justify-center items-center flex-col gap-2" onClick={() => setMenuOpen(!menuOpen)}>
@@ -208,10 +231,24 @@ else {
             </section>
             <section className="flex flex-col">
 
-                <p className="flex items-center justify-start text-lg  gap-2"><span className="font-thin text-[12px] text-opacity-50">01</span>about</p>
-                <p className="flex items-center justify-start text-lg  gap-2"><span className="font-thin text-[12px] text-opacity-50">02</span>journal</p>
-                <p className="flex items-center justify-start text-lg  gap-2"><span className="font-thin text-[12px] text-opacity-50">03</span>linkedin</p>
-                <p className="flex items-center justify-start text-lg  gap-2"><span className="font-thin text-[12px] text-opacity-50">02</span>upwork</p> <p className="flex items-center justify-start text-lg  gap-2"><span className="font-thin text-[12px] text-opacity-50">01</span>contact</p>
+                        <Link href={"/about"}>
+                <p className="flex items-center justify-start text-lg  gap-2"><span className="font-thin text-[12px] text-opacity-50">01</span>About</p>
+                </Link>
+                <Link href={"/journal"}>
+                <p className="flex items-center justify-start text-lg  gap-2"><span className="font-thin text-[12px] text-opacity-50">02</span>Journal</p>
+                </Link>
+
+                <a href="" referrerPolicy="no-referrer" target="_blank"> 
+                <p className="flex items-center justify-start text-lg  gap-2"><span className="font-thin text-[12px] text-opacity-50">03</span>Contact</p>
+                </a>
+
+                <a href="" referrerPolicy="no-referrer" target="_blank">
+                <p className="flex items-center justify-start text-lg  gap-2"><span className="font-thin text-[12px] text-opacity-50">04</span>Linkedin</p>
+                </a>
+                <a href="https://www.upwork.com/freelancers/~016509dc8b3fcee662?mp_source=share" referrerPolicy="no-referrer" target="_blank">
+                <p className="flex items-center justify-start text-lg  gap-2"><span className="font-thin text-[12px] text-opacity-50">05</span>Upwork</p>
+                </a>
+                
 
             </section>
        </section>

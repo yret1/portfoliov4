@@ -24,35 +24,7 @@ const initialState : State = {
 
 
     projects : [
-        {
-            title : "Project 1",
-            description : "This is project 1",
-            images : ["https://via.placeholder.com/150"],
-            link : "",
-            github : "",
-            tech : [],
-            id : 0
-        },
-    
-        {
-            title : "Project 2",
-            description : "This is project 2",
-            images : ["https://via.placeholder.com/150"],
-            link : "",
-            github : "",
-            tech : [],
-            id : 1
-        },
-    
-        {
-            title : "Project 3",
-            description : "This is project 3",
-            images : ["https://via.placeholder.com/150"],
-            link : "",
-            github : "",
-            tech : [],
-            id : 2
-        }
+       
     ],
     selected : {
         title : "",

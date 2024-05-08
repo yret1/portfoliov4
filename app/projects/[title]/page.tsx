@@ -1,15 +1,8 @@
 'use client'
 
-
-
-
-import Link from "next/link"
-import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 
 import {AnimatePresence, motion} from 'framer-motion'
-import { useGSAP } from "@gsap/react"
-import gsap from "gsap"
 import NextProject from "@/components/NextProject"
 import Image from "next/image"
 
@@ -17,9 +10,25 @@ import Image from "next/image"
 const Project = () => {
 
 
-  type Tech = 'React' | 'Next' | 'MongoDB' | 'Node' | 'TailwindCSS' | 'Redux' | 'TypeScript' | 'Framer-Motion';
+
+  /**
+   * Denna sida är dynamisk. Data hämtas från redux store och visas beroende på vilket projekt som är valt.
+   * Animationer sköts med framer-motion och gsap.
+   * 
+   * Nästa projekt räknas ut genom att jämföra det aktiva projektets index med alla projekt i store.
+   * 
+   * 
+   * 
+   */
 
 
+  //Types för rendering av teknikere
+
+  type Tech = 'React' | 'Next' | 'MongoDB' | 'Node' | 'TailwindCSS' | 'Redux' | 'TypeScript' ;
+
+
+
+  //Statisk data för bilder
   const images : Record<Tech, string>  = {
     React : "/icons/React.svg",
     Next : "/icons/Next.svg",
@@ -27,12 +36,11 @@ const Project = () => {
     Node : "/icons/Node.svg",
     TailwindCSS : "/icons/Tailwind.svg",
     Redux : "/icons/Redux.svg",
-    TypeScript : "/icons/Typescript.svg",
-    "Framer-Motion": "/icons/Framer-Motion.svg",
+    TypeScript : "/icons/Typescript.svg"
 
   }
 
-
+  //Hämta aktivt projekt från store
     const project = useSelector((state:any) => state.project.selected)
 
 
@@ -42,21 +50,7 @@ const Project = () => {
 
 
 
-    useGSAP(() => {
-
-      //Gsap animationer
-      const tl = gsap.timeline()
-
-
-      tl.from("#textshow", {
-        y: 100,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.1
-      })
-    })
-
-    
+ 
   return (
    <section className="w-full min-h-screen pb-40">
 
@@ -181,11 +175,16 @@ className="text-center">{project.descriptiontwo}</motion.p>
  exit={{y:100, opacity:0}}
  transition={{duration:1, ease:"easeInOut", delay:0.5}}
 className="font-bold text-white">Projektet byggdes med:</motion.p>
-<section className="grid grid-cols-3 place-items-center p-4">
+
+<motion.section
+ initial={{opacity:0}}
+  animate={{opacity:1}}
+  exit={{opacity:0}}
+ className="grid grid-cols-3 gap-5 place-items-center p-4">
       {project.technologies && project.technologies.map((tech: Tech, index:number) => (
         <Image key={tech} src={images[tech]} alt={tech} width={40} height={40} />
       ))}
-    </section>
+    </motion.section>
 </section>
 </section>
 

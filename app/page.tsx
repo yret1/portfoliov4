@@ -4,6 +4,7 @@ import gsap from "gsap";
 import Link from "next/link";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function Home() {
 
@@ -43,13 +44,24 @@ const handleCurrentProject = (title:string) => {
     <section className="w-full flex justify-end items-center ">
       <ul className="w-full flex transition-all justify-end items-end perspective-1000 pt-20 flex-col p-4">
 
+
+
+        <AnimatePresence mode="wait">
+
         {projects.map((project : any, index : number) => (
 
           <Link onClick={() => handleCurrentProject(project.title)} href={`/projects/${project.title}`} key={index}>
-              <li id="listitem" className="font-extrabold text-5xl md:text-7xl lg:text-10xl transform-style-3d transform opacity-100 -rotate-y-[20deg] hover:-rotate-y-6  transition-all cursor-pointer hover:text-transparent hover: text-black font-freeman">{project.title.toUpperCase()}</li>
+              <motion.li
+              initial={{opacity:0, y: 1000, rotateY: 30}}
+
+              animate={{opacity:1, y: 0, rotateY: 20}}
+              transition={{duration:0.2, delay:0.15 * index, ease: "circInOut"}}
+               id="listitem" className="font-extrabold text-5xl md:text-7xl lg:text-10xl transition-all cursor-pointer hover:text-transparent text-black font-freeman">{project.title.toUpperCase()}</motion.li>
           </Link>
 
         ))}
+
+      </AnimatePresence>
       </ul>
 
     </section>
