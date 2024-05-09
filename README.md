@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### Detta projektet är enbart till för en inlämning
 
-## Getting Started
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Välkommen till en snabb liten konceptportfolio
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Projektet är byggt i next.js och behöver köras dynamiskt.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+I koden används det en rad med olika delar.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+Framer motion : Mest förekommande är motion komponenten som låter dig ställa in animationer rakt på element i .tsx filerna.
 
-To learn more about Next.js, take a look at the following resources:
+Gsap: Där framer motion når sina begränsningar använder jag istället gsap. Detta för mer styrda animationer.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+MongoDB: Databasen jag använder för de flesta av mina projekt. För just detta projektet är det just där projekten ligger.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Redux: Används för global statehantering då propdrilling mellan pages i next inte är möjligt utan att använda serverside props!
 
-## Deploy on Vercel
+Next: Projectet är såklart byggt i next js för att förenkla vissa delar. Istället för att använda en externa api så använder jag mig av en egen api-route i next js för att skicka en server-förfrågan till min databas!
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Detta är inte min riktiga portfolio och är långt ifrån mitt bästa arbete. Då jag har en väldigt stressig period just nu och även parallelt med en heltidstjänst ha bedrvit 2 kund-kontrakt så fick detta bli ett snabbt ihopkast som uppfyller precis de tekniska kraven.
+
+
+Live: www.gustavssondev.com
