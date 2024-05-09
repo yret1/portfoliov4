@@ -46,7 +46,7 @@ const handleCurrentProject = (title:string) => {
 
 
 
-        <AnimatePresence mode="wait">
+        <AnimatePresence>
 
         {projects.map((project : any, index : number) => (
 

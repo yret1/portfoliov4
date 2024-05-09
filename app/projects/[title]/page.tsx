@@ -2,10 +2,9 @@
 
 import { useSelector } from "react-redux"
 
-import {AnimatePresence, motion} from 'framer-motion'
+import {motion} from 'framer-motion'
 import NextProject from "@/components/NextProject"
 import Image from "next/image"
-
 
 const Project = () => {
 
@@ -22,9 +21,14 @@ const Project = () => {
    */
 
 
-  //Types för rendering av teknikere
+  //Types för rendering av tekniker
 
   type Tech = 'React' | 'Next' | 'MongoDB' | 'Node' | 'TailwindCSS' | 'Redux' | 'TypeScript' ;
+
+
+
+
+
 
 
 
@@ -47,158 +51,125 @@ const Project = () => {
 
 
 
+    const animations = {
+      initial:{opacity:0},
+      animate:{opacity:1},
+      exit:{opacity:0},
+      transition:{duration:1, ease:"easeInOut"}
+    }
+
 
 
 
  
   return (
-   <section className="w-full min-h-screen pb-40">
-
-
-    <AnimatePresence>
-  
+   <section className="w-full min-h-screen pb-40 flex flex-col items-center justify-start">
 
     <motion.section
     initial={{opacity:0, height:0}}
     animate={{opacity:1, height:""}}
     transition={{duration:1, ease:"easeInOut"}}
-     className="w-full h-64 bg-black md:h-96 bg-cover bg-center lg:h-[800px]" style={{
-      backgroundImage: `url("https://images.unsplash.com/photo-1714886772771-c5b602e9e553?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`,
+    exit={{opacity:0, height:0}}
+     className="w-full h-64 bg-black bg-cover bg-center lg:h-[800px]" style={{
+      backgroundImage: `url(${project.images[0]})`,
     }}>
 
 
     </motion.section>
 
-    <section className="w-full flex items-center justify-center p-10 gap-5 flex-col">
 
-
-      <motion.h1
-      initial={{y:100, opacity:0}}
-      animate={{y:0, opacity:1}}
-      exit={{y:100, opacity:0}}
-      transition={{duration:1, ease:"easeInOut", delay:0.5}}
-      
-       id="textshow" className=" text-white lg:hidden font-bold text-3xl p-4 text-center">{project.title}</motion.h1>
-
-
-
-      <section className="flex flex-1 flex-col gap-5 lg:flex-row">
-
-      <section className="flex flex-col justify-center items-center">
-
- 
-        <motion.h1 
-          initial={{y:100, opacity:0}}
-          animate={{y:0, opacity:1}}
-          exit={{y:100, opacity:0}}
-          transition={{duration:1, ease:"easeInOut", delay:0.5}} id="textshow" className="hidden lg:block text-white font-bold text-6xl p-4">{project.title}</motion.h1>
-
-    <motion.p
-      initial={{y:100, opacity:0}}
-      animate={{y:0, opacity:1}}
-      exit={{y:100, opacity:0}}
-      transition={{duration:1, ease:"easeInOut", delay:0.5}} id="textshow" className="text-center">{project.description}</motion.p>
-    </section>
 
     <motion.section
-
-    initial={{x:100, opacity:0}}
-    animate={{x:0, opacity:1}}
-    exit={{x:100, opacity:0}}
-    transition={{duration:1, ease:"easeInOut", delay:0.5}}
-     className="w-full flex-1 flex justify-center items-center flex-col gap-4 md:flex-row">
-
-
-<section className="bg-center bg-cover w-full h-60 rounded-md md:h-96 lg:w-96" style={{
-      backgroundImage: `url("https://images.unsplash.com/photo-1714886772771-c5b602e9e553?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`,
-    }}></section>
-
-      <section className="bg-center hidden lg:block bg-cover w-full h-60 rounded-md md:h-96 lg:w-96" style={{
-      backgroundImage: `url("https://images.unsplash.com/photo-1714886772771-c5b602e9e553?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`,
-    }}></section>
+    initial={{opacity:1}
+    }
+    animate={{opacity:1,
+      transition: {
+        staggerChildren: 0.4
+      }
+    }}
+     className="grid w-screen p-10 md:grid-cols-3 gap-4">
 
 
-</motion.section>
+      <motion.section
+        initial={{opacity:0}}
+        animate={{opacity:1}}
+        exit={{opacity:0}}
+      className="bg-black w-full lg:h-96 rounded-md flex justify-end items-center flex-col">
 
-
-
+        <h1 className="font-bold text-4xl">The Project</h1>
+        <Image src={"/icons/mission.svg"} width={300} height={300} alt="Project icon" />
+      </motion.section>
 
 
 
+      <motion.section
+      initial={{opacity:0}}
+      animate={{opacity:1}}
+      exit={{opacity:0}}
+      className="bg-black w-full md:col-span-2 lg:col-span-2 rounded-md  flex justify-center items-center">
 
-      </section>
-
-  
-
-
-
-</section>
-
-
-    
+        <h1 className="font-bold text-white md:text-3xl lg:text-6xl">{project.title}</h1>
+      </motion.section>
+      
 
 
-<section className="flex justify-center  items-center flex-col-reverse gap-5 lg:flex-row p-10">
+      <motion.section
+      initial={{opacity:0}}
+      animate={{opacity:1}}
+      exit={{opacity:0}}
+      className="bg-black w-full h-full lg:h-96 flex md:col-span-2 lg:col-span-3 flex-col gap-4 justify-start rounded-md p-4 items-center">
 
- <motion.section 
-  initial={{x:-100, opacity:0}}
-  animate={{x:0, opacity:1}}
-  exit={{x:-100, opacity:0}}
-  transition={{duration:1, ease:"easeInOut", delay:0.5}}
-  className="w-full flex flex-col lg:flex-row gap-4">
- <section className="bg-center bg-cover w-full h-60 rounded-md md:h-96 lg:w-96" style={{
-      backgroundImage: `url("https://images.unsplash.com/photo-1714886772771-c5b602e9e553?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`,
-    }}></section>
+        <h2 className="font-bold text-3xl">What Is {project.title} ?</h2>
 
-      <section className="bg-center hidden lg:block bg-cover w-full h-60 rounded-md md:h-96 lg:w-96" style={{
-      backgroundImage: `url("https://images.unsplash.com/photo-1714886772771-c5b602e9e553?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`,
-    }}></section>
+       <section className="h-full justify-center items-center flex">
 
- </motion.section>
+       <p className="text-center text-lg px-4">{project.description}</p>
 
-<section className="w-full flex flex-col items-center gap-6 justify-center">
-<motion.p 
- initial={{y:100, opacity:0}}
- animate={{y:0, opacity:1}}
- exit={{y:100, opacity:0}}
- transition={{duration:1, ease:"easeInOut", delay:0.5}}
-className="text-center">{project.descriptiontwo}</motion.p>
+       </section>
 
 
 
 
+       
 
-<section className="flex flex-col justify-center items-center">
-<motion.p
- initial={{y:100, opacity:0}}
- animate={{y:0, opacity:1}}
- exit={{y:100, opacity:0}}
- transition={{duration:1, ease:"easeInOut", delay:0.5}}
-className="font-bold text-white">Projektet byggdes med:</motion.p>
 
-<motion.section
- initial={{opacity:0}}
-  animate={{opacity:1}}
-  exit={{opacity:0}}
- className="grid grid-cols-3 gap-5 place-items-center p-4">
-      {project.technologies && project.technologies.map((tech: Tech, index:number) => (
-        <Image key={tech} src={images[tech]} alt={tech} width={40} height={40} />
-      ))}
+      </motion.section>
+
+      <motion.section
+      
+      initial={{opacity:0}}
+        animate={{opacity:1}}
+        exit={{opacity:0}} className="bg-black h-96 w-full lg:col-span-2 rounded-md  p-6 gap-5 flex flex-col justify-between items-center">
+        <h3 className="text-center text-white font-bold text-3xl">How did it go?</h3>
+
+        <p className="text-center text-lg text-white">{project.descriptiontwo}</p>
+
+
+
+        <section className="w-full flex justify-center items-center">
+          <a className="" href={project.link} referrerPolicy="no-referrer" target="_blank">
+          <button className=" px-4 py-2 rounded-md text-black bg-white">Live Page</button>
+          </a>
+
+          {project.codelink !== "Private" && <button className=" px-4 py-2 rounded-md text-black bg-white">Code</button>}
+        </section>
+      </motion.section>
+
+
+      <motion.section
+      initial={{opacity:0}}
+      animate={{opacity:1}}
+      exit={{opacity:0}}
+      
+      className="w-full h-full bg-transparent rounded-md flex justify-center items-center">
+
+        <NextProject />
+
+      </motion.section>
+      
+
     </motion.section>
-</section>
-</section>
 
-      </section>
-
-
-
-      <section className="flex justify-center ite">
-
-
-
-      <NextProject title={project.title} />
-      </section>
-      </AnimatePresence>
    </section>
   )
 }

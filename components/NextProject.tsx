@@ -25,14 +25,11 @@ const NextProject = (title : any) => {
   
           const nextIndex = currentIndex + 1
   
-  
-          console.log(nextIndex)
-  
-          if(nextIndex > projects.length - 1) {
+          if(nextIndex >= projects.length - 1) {
             setNextProjectTitle(projects[0].title)
           }else {
             setNextProjectTitle(projects[nextIndex].title)
-          }
+          }9
   
         }
   
@@ -44,7 +41,11 @@ const NextProject = (title : any) => {
 
 
     const handleCurrentProject = (title:string) => {
+
+      setTimeout(() => {
+
         dispatch({type : 'SET_SELECTED', payload : title})
+      }, 500)
       }
   return (
     <Link onClick={() => handleCurrentProject(nextProjectTitle)} href={`/projects/${nextProjectTitle}`}>
